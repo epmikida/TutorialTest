@@ -1,0 +1,20 @@
+mainmodule multiple {
+
+  class CProxy_Worker;
+
+  mainchare Main {
+    entry Main(CkArgMsg* msg);
+  }
+
+  chare Coordinator {
+    entry Coordinator(int number);
+    entry void introduce(CProxy_Worker w);
+    entry void done();
+  }
+
+  chare Worker {
+    entry Worker(int number);
+    entry void work(CProxy_Coordinator c);
+  }
+
+}

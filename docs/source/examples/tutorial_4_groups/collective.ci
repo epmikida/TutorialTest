@@ -1,0 +1,15 @@
+mainmodule collective {
+
+  readonly CProxy_Main mainProxy;
+
+  mainchare Main {
+    entry Main(CkArgMsg* msg);
+    entry [reductiontarget] void done();
+  }
+
+  array [2D] My2DArray {
+    entry My2DArray();
+    entry void hello();
+  }
+
+}

@@ -1,0 +1,12 @@
+mainmodule singleton {
+
+  mainchare Main {
+    entry Main(CkArgMsg* msg);
+  }
+
+  chare MyChare {
+    entry MyChare(int number);
+    entry void hello(int number);
+  }
+
+}

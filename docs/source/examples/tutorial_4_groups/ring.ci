@@ -1,0 +1,16 @@
+mainmodule ring {
+
+  readonly int elements;
+  readonly CProxy_Main mainProxy;
+
+  mainchare Main {
+    entry Main(CkArgMsg* msg);
+    entry void done();
+  }
+
+  array [1D] My1DArray {
+    entry My1DArray();
+    entry void hello();
+  }
+
+}
