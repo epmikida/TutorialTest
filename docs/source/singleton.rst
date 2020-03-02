@@ -1,11 +1,14 @@
+#################################
 Defining and Creating More Chares
-=================================
+#################################
+
 In this section, we will learn how to define and create additional chares, and
 how to send messages between them.  Code for this part of the tutorial is found
 in ``charm/examples/tutorial/2_chare_creation``.
 
+***********************************************
 The CI file: Singleton Chares and Entry Methods
------------------------------------------------
+***********************************************
 
 The most basic type of chare in Charm++ is the singleton chare. It represents a
 single object in the application which has a global identifier and can be
@@ -40,8 +43,9 @@ For the purposes of this tutorial, all entry methods will have the ``void``
 return type. It is possible to have a non-void return type, but this is an
 advanced feature discuss in <somewhere>.
 
+******************************************
 Chare Creation and Communication via Proxy
-------------------------------------------
+******************************************
 
 In the .C file, we see that defining the behavior of our new chare is largely
 the same as before. This is shown in
@@ -118,8 +122,9 @@ message is simply packed up and sent, and execution immediately resumes.
 Because of this, the message printed out on line 12 may occur before or after
 the invocation of ``hello`` on the chare actually occurs.
 
+******************************************
 Extending the Example with Multiple Chares
-------------------------------------------
+******************************************
 
 Now that we have created our own singleton chare and sent it a message, it
 follows that we will want to be able to create multiple chares that can

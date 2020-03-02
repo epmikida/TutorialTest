@@ -1,15 +1,14 @@
+##########################
 Your First Charm++ Program
-==========================
-
-.. contents::
-  :depth: 2
+##########################
 
 In simple "Hello World" example, we will learn how Charm++ programs start, and
 how to define our very first chare.  Code for this part of the tutorial is
 found in ``charm/examples/tutorial/1_mainchare``.
 
-Main chare: the entry point of the application
-----------------------------------------------
+**********************************************
+The Main Chare: Entry Point of the Application
+**********************************************
 
 As described in `What is Charm++?`_, a Charm++ application is composed of
 chares. Therefore, in order to write a Charm++ application we must learn how
@@ -26,8 +25,8 @@ C++ application, but with one extra step. In order inform the runtime system
 which of your C++ objects are actually chares, the first step is to write a
 Charm++ Interface file (.ci file).
 
-CI Files
---------
+CI Files: Declaring a Chare
+===========================
 
 A .ci file is an interface file which is compiled with the rest of the program
 in order to promote certain C++ objects to chares. A .ci file declares one or
@@ -79,8 +78,8 @@ always generate a ``*.decl.h`` and a ``*.def.h`` for each module defined in the
 .ci file.  These files contain generated definitions for the chares declared in
 these modules and will be used in the next step of this tutorial.
 
-Chare definitions
------------------
+C Files: Defining a Chare
+=========================
 
 In the .ci file, we declared the chares that will be a part of our application.
 Other than this thin interface, the rest of a Charm++ application (including the
@@ -144,6 +143,11 @@ procedure across all processes no matter where the exit call originated from.
 It only needs to be called once from anywhere in the program to
 correctly exit.
 
+.. Should we compile as we go, or move this to the last section and make it
+.. compiling and running your first charm program. Probably it will stay here
+.. to stay consistent. We compile after writing the .ci file which I think is
+.. useful.
+
 To compile our code, we will again use the Charm++ compile script, ``charmc``:
 
 .. code:: bash
@@ -156,8 +160,9 @@ coordinate compilation. A typical Makefile for a Charm++ program is shown below:
 .. include:: examples/tutorial_1_main/Makefile
   :code: make
 
-Running a Charm++ program
--------------------------
+**********************************
+Running Your First Charm++ Program
+**********************************
 
 Now that we've succesfully built our first Charm++ program we need to run it.
 How to run a Charm++ program can vary depending on the environment you are

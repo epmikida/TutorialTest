@@ -1,8 +1,10 @@
-.. contents::
-  :depth: 3
+#####################
+Collections of Chares
+#####################
 
-Collections of Chares: Arrays
-=============================
+************
+Chare Arrays
+************
 
 .. First, a ring example. Pass a message in a ring some number of times.
 .. Then transition into broadcasts, use a 2D array this time maybe.
@@ -21,8 +23,10 @@ Collections of Chares: Arrays
 .. include:: examples/tutorial_3_arrays/collective.C
   :code: c++
 
-Collections of Chares: Groups
-=============================
+************
+Group Chares
+************
 
-Collections of Chares: Node Groups
-==================================
+***********
+Node Groups
+***********
