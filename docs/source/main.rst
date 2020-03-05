@@ -2,15 +2,15 @@
 Your First Charm++ Program
 ##########################
 
-In simple "Hello World" example, we will learn how Charm++ programs start, and
-how to define our very first chare.  Code for this part of the tutorial is
-found in ``charm/examples/tutorial/1_mainchare``.
+In this simple "Hello World" example, we will learn how Charm++ programs start,
+and how to define our very first chare.  Code for this part of the tutorial is
+found in ``examples/tutorial_1_main/``.
 
 **********************************************
 The Main Chare: Entry Point of the Application
 **********************************************
 
-As described in `What is Charm++?`_, a Charm++ application is composed of
+As described in :ref:`intro`, a Charm++ application is composed of
 chares. Therefore, in order to write a Charm++ application we must learn how
 to define and create chares. The first type of chare we will learn about is
 called a **mainchare**. The **mainchare** for a Charm++ application is
@@ -36,13 +36,14 @@ a single **mainmodule**, but in general programs can be broken into as many
 modules as desired to organize the code. More specifics on modules can be found
 in the manual.
 
-An example .ci file is shown below, and can be found in the tutorial code in the
-Charm++ repository: ``charm/examples/charm++/tutorial/1_mainchare/main.ci``.
+The example .ci file for this exercise shown below, and can be found in the
+tutorial code in the Charm++ repository: ``examples/tutorial_1_main/main.ci``.
 
-.. Can we add a caption?
-.. include:: examples/tutorial_1_main/main.ci
-  :code: charmci
-  :number-lines:
+.. literalinclude:: examples/tutorial_1_main/main.ci
+  :language: charmci
+  :linenos:
+  :lineno-match:
+  :caption: examples/tutorial_1_main/main.ci
 
 The first line declares a **mainmodule** named ``main``, followed by a pair of
 curly braces. Between these braces, we can declare any number of chares that
@@ -60,7 +61,7 @@ discussion of what entry methods are and how they are work will come in the
 later parts of this tutorial. For now, it is enough to just think of them as
 methods which the Charm++ runtime system is aware of. In this case ``Main`` has
 a single entry method for its constructor, which takes a single argument of type
-``CkArgMsg*``.
+``CkArgMsg*``. The **mainchare** constructor must always have this signature.
 
 Now that we have written a very basic .ci file we can compile it using the
 Charm++ compiler script that was built when you first built Charm++ in the
@@ -95,9 +96,11 @@ but as with any C++ code, the class declaration and defintion can be split into
 .h and .C files if desired.  Lines which contain Charm++ specific changes to
 normal C++ usage are discussed below.
 
-.. include:: examples/tutorial_1_main/main.C
-  :code: c++
-  :number-lines:
+.. literalinclude:: examples/tutorial_1_main/main.C
+  :language: c++
+  :linenos:
+  :lineno-match:
+  :caption: examples/tutorial_1_main/main.C
 
 .. Find out EXACTLY where .decl.h should be included. I think its actually just
 .. in any place where it is visible to class declarations?
@@ -118,12 +121,43 @@ files, then the ``.def.h`` should only be included in one of them.
 Beyond this, we have a normal C++ class definition for the class ``Main`` on
 lines 3-19. The class name matches the name given to the chare type in the .ci
 file, and the class publicly inherits from the generated class ``CBase_Main``.
-Whenever defining a chare, ``Foo``, the generated class name will always be of
-the form ``CBase_Foo``.  It also defines a method for each entry method
-declared in the .ci file. In this case, it is only the constructor which needs
-a definition. Because Main is just like any other C++ class, we could also
-declare additional member variables and methods at this point. However, for this
+Whenever defining a chare, *Foo*, the generated class name will always be of
+the form *CBase_Foo*.
+
+.. literalinclude:: examples/tutorial_1_main/main.ci
+  :language: charmci
+  :lines: 2
+  :linenos:
+  :lineno-match:
+  :caption: Declaraion of Main in the .ci file
+
+.. literalinclude:: examples/tutorial_1_main/main.C
+  :language: c++
+  :lines: 3
+  :linenos:
+  :lineno-match:
+  :caption: The matching declaration in the .C file, which inherits from `CBase_Main`
+
+We must also define a method for each entry method declared in the .ci file. In
+this case, it is only the constructor which needs a definition, shown below.
+Because ``Main`` is just like any other C++ class, we could also declare
+additional member variables and methods at this point. However, for this
 example we only need the constructor for now.
+
+.. literalinclude:: examples/tutorial_1_main/main.ci
+  :language: charmci
+  :lines: 3
+  :linenos:
+  :lineno-match:
+  :caption: The declaration of the Main constructor entry method in ``main.ci``
+
+.. literalinclude:: examples/tutorial_1_main/main.C
+  :language: c++
+  :lines: 5-18
+  :emphasize-lines: 2-3, 9, 11, 13
+  :linenos:
+  :lineno-match:
+  :caption: The defintion of the Main constructor entry method in ``main.C``
 
 Because this is a **mainchare**, the constructor is automatically invoked by
 the runtime system during application startup, and is passed a pointer to a
@@ -131,17 +165,17 @@ the runtime system during application startup, and is passed a pointer to a
 arguments used by the Charm++ runtime system. Lines 6 and 7 show how the
 message is used to get the command line arguments, which can then be used just
 as in a normal C++ program. After dealing with command line arguments, the
-``CkArgMsg`` should be deleted.
+``CkArgMsg`` should be deleted (line 13).
 
 In a normal application this is likely where we would begin creating the rest
 of the chares for our application and start sending messages. In this simple
 example, we simply print out the command line arguments (using a Charm++
 specific output method, ``CkPrintf``, whose signature is the same as
-``printf``), print out a Hello World message, and exit. To exit a
-Charm++ program, we must call ``CkExit()``. ``CkExit()`` coordinates the exit
-procedure across all processes no matter where the exit call originated from.
-It only needs to be called once from anywhere in the program to
-correctly exit.
+``printf``), print out a Hello World message (line 15), and exit. To exit a
+Charm++ program, we must call ``CkExit()`` (line 17). ``CkExit()`` coordinates
+the exit procedure across all processes no matter where the exit call
+originated from.  It only needs to be called once from anywhere in the program
+to correctly exit.
 
 .. Should we compile as we go, or move this to the last section and make it
 .. compiling and running your first charm program. Probably it will stay here
@@ -157,8 +191,10 @@ To compile our code, we will again use the Charm++ compile script, ``charmc``:
 As an aside, as your programs become larger, you will want to use a Makefile to
 coordinate compilation. A typical Makefile for a Charm++ program is shown below:
 
-.. include:: examples/tutorial_1_main/Makefile
-  :code: make
+.. literalinclude:: examples/tutorial_1_main/Makefile
+  :lines: 2-
+  :prepend: CHARMC = <path_to_charmc>
+  :caption: A typical Makefile for a Charm++ program
 
 **********************************
 Running Your First Charm++ Program

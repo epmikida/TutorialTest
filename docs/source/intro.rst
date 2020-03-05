@@ -1,7 +1,8 @@
+.. _intro:
+
 ################
 What is Charm++?
 ################
-.. name
 
 *How much do we want to get into this vs just referring to the manual?*
 

@@ -1,7 +1,5 @@
 #include "multiple.decl.h"
 
-CProxy_Worker proxy;
-
 class Main : public CBase_Main {
 public:
   Main(CkArgMsg* msg) {
